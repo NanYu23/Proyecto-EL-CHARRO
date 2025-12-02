@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Charro - Menú</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes de Google: Rye (para el estilo western) y Roboto (para texto normal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Roboto:wght@400;500;700;900&family=Satisfy&display=swap" rel="stylesheet">
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>     
+        /* Definición de fuentes personalizadas */
+        .font-western { font-family: 'Rye', serif; }
+        .font-body { font-family: 'Roboto', sans-serif; }
+        .font-script { font-family: 'Satisfy', cursive; } /* Para el logo decorativo del menú */
+        
+        /* Colores específicos */
+        .bg-charro-red { background-color: #b91c1c; }
+        .text-charro-red { color: #b91c1c; }
+        .border-charro-red { border-color: #b91c1c; }
+        
+        .text-charro-green { color: #15803d; }
+        .bg-charro-green-dark { background-color: #38a169; } /* Verde más oscuro para la tarjeta de Login */
+        .text-charro-green-dark { color: #38a169; }
+
+        .bg-charro-cream { background-color: #fef3c7; }
+        
+        .bg-menu-paper { background-color: #fdfbf7; } /* Color crema papel */
+        .text-menu-brown { color: #5d4037; } /* Color café para textos del menú */
+        .text-menu-orange { color: #f59e0b; } /* Color dorado/naranja */
+
+        /* Estilo para los contenedores con borde rojo grueso */
+        .content-box {
+            border: 3px solid #b91c1c;
+        }
+
+        /* Utilidad para ocultar secciones */
+        .hidden-section { display: none; }
+
+        /* Animación suave */
+        .animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Líneas punteadas para el menú (Platillo ........ $Precio) */
+        .menu-dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted #a8a29e;
+            margin: 0 8px 4px 8px; /* Ajuste para alinear con el texto base */
+        }
+
+        /* Decoraciones de esquina simuladas con CSS (Papel picado simple) */
+        .corner-deco {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        /* Estilo para los placeholders de Login */
+        .login-input::placeholder {
+            color: #ccc; /* Un gris claro si es necesario */
+            font-weight: 500;
+        }
+        .login-input {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500; /* Para el texto normal del input */
+            color: #333;
+            border-radius: 0.25rem;
+        }
+
+        /* Estilo para la tarjeta de Login */
+        #login-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+    </style>
+</head>
+<body class="bg-white font-body min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="bg-charro-red w-full py-3 px-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Logo / Nombre -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showSection('conoce')">
+                <div class="bg-yellow-400 rounded-full p-1 border-2 border-black w-10 h-10 flex items-center justify-center overflow-hidden">
+                    <img src="logo-charro.png" alt="Logo" class="w-full h-full object-contain">
+                </div>
+                <span class="font-western text-white text-2xl tracking-wide">EL CHARRO</span>
+            </div>
+
+            <!-- Navegación -->
+            <nav class="flex gap-3">
+                <button class="bg-charro-cream text-charro-red font-bold px-3 py-1 md:px-4 md:py-1 rounded shadow hover:bg-white transition-colors text-sm md:text-base ring-2 ring-offset-1 ring-transparent focus:ring-red-500">Bienvenido</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="flex-grow w-full max-w-5xl mx-auto p-2 md:p-4">
+
+        <!-- ================= SECCIÓN LOGIN (NUEVA) ================= -->
+        <main id="login" class="w-full hidden-section animate-fade-in flex items-center justify-center pt-10 md:pt-20">
+            <!-- Tarjeta de Login (Fondo verde como en el maquetado) -->
+            <div id="login-card" class="bg-charro-green-dark p-8 md:p-10 rounded-lg w-full transform -rotate-1 shadow-2xl">
+                
+                <!-- Logo El Charro -->
+                <div class="flex items-center justify-center gap-3 mb-8">
+                    <div class="bg-yellow-400 rounded-full p-1 border-2 border-black w-12 h-12 flex items-center justify-center overflow-hidden">
+                        <img src="logo-charro.png" alt="Logo" class="w-full h-full object-contain">
+                    </div>
+                    <span class="font-western text-white text-4xl tracking-wide">EL CHARRO</span>
+                </div>
+
+                <!-- Formulario -->
+                <form class="space-y-6">
+                    
+                    <!-- Campo Nombre de Usuario -->
+                    <div>
+                        <input type="text" 
+                               id="username" 
+                               placeholder="Nombre de Usuario" 
+                               class="login-input w-full p-3 text-lg border-2 border-gray-100 placeholder:text-gray-400 placeholder:font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition"
+                               onfocus="this.placeholder=''"
+                               onblur="this.placeholder='Nombre de Usuario'"
+                               required>
+                    </div>
+
+                    <!-- Campo Contraseña -->
+                    <div>
+                        <input type="password" 
+                               id="password" 
+                               placeholder="Contraseña" 
+                               class="login-input w-full p-3 text-lg border-2 border-gray-100 placeholder:text-gray-400 placeholder:font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition"
+                               onfocus="this.placeholder=''"
+                               onblur="this.placeholder='Contraseña'"
+                               required>
+                    </div>
+
+                    <!-- Botón Iniciar Sesión -->
+                    <button type="submit" 
+                            class="w-full bg-charro-red text-white font-bold text-xl uppercase py-3 rounded-md shadow-lg hover:bg-red-700 transition transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-red-400">
+                        Iniciar Sesion
+                    </button>
+
+                    <!-- Enlace Registrarse -->
+                    <div class="text-center pt-2 text-white">
+                        No tienes cuenta? 
+                        <a href="#" class="font-bold underline text-yellow-300 hover:text-yellow-400 transition">Regístrate</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- ================= SECCIÓN MENÚ ================= -->
+        <main id="menu" class="w-full hidden-section animate-fade-in">
+            
+            <!-- Título Principal Menú -->
+            <div class="text-center mb-4 mt-2">
+                <h1 class="font-western text-6xl md:text-7xl text-charro-green drop-shadow-sm tracking-wider uppercase">
+                    MENU
+                </h1>
+                <h2 class="font-western text-lg md:text-xl text-charro-red uppercase mt-[-5px] tracking-wide">
+                    PLATILLOS | BEBIDAS | POSTRES
+                </h2>
+            </div>
+
+            <!-- Carta del Menú (Simulación de papel) -->
+            <div class="bg-menu-paper shadow-2xl rounded-sm p-6 md:p-12 relative overflow-hidden border border-amber-100 mx-auto max-w-4xl">
+                
+                <!-- Decoraciones esquinas (simuladas) -->
+                <div class="absolute top-0 left-0 w-24 h-24 pointer-events-none opacity-80">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0 H60 Q30 30 0 60 V0Z" fill="#b91c1c"/>
+                        <circle cx="20" cy="20" r="5" fill="#fbbf24"/>
+                    </svg>
+                </div>
+                <div class="absolute top-0 right-0 w-24 h-24 pointer-events-none opacity-80 transform rotate-90">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0 H60 Q30 30 0 60 V0Z" fill="#15803d"/>
+                         <circle cx="20" cy="20" r="5" fill="#fbbf24"/>
+                    </svg>
+                </div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 pointer-events-none opacity-80 transform -rotate-90">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0 H60 Q30 30 0 60 V0Z" fill="#15803d"/>
+                    </svg>
+                </div>
+                <div class="absolute bottom-0 right-0 w-24 h-24 pointer-events-none opacity-80 transform rotate-180">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0 H60 Q30 30 0 60 V0Z" fill="#b91c1c"/>
+                    </svg>
+                </div>
+
+                <!-- Logo Decorativo Interior -->
+                <div class="text-center mb-8 relative z-10">
+                    <div class="font-script text-4xl md:text-5xl text-menu-brown transform -rotate-2">El Charro</div>
+                    <div class="text-sm uppercase tracking-[0.3em] text-yellow-600 font-bold mt-1">del pueblo</div>
+                    <div class="w-24 h-1 bg-gray-300 mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <!-- Contenido Menú Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 relative z-10">
+
+                    <!-- COLUMNA IZQUIERDA -->
+                    <div class="space-y-8">
+                        
+                        <!-- Quesadillas -->
+                        <section>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-western text-2xl text-charro-red uppercase">Quesadillas</h3>
+                                <!-- Badge de precio estilo estrella -->
+                                <div class="bg-orange-400 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center shadow-sm border-2 border-orange-200 transform rotate-12">
+                                    $25
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 italic mb-2">Fritas preparadas con crema, lechuga y queso</p>
+                            <p class="text-sm font-bold text-gray-700 leading-relaxed text-center border-t border-b border-gray-200 py-2 bg-white/50">
+                                Pollo - Tinga de res - Rajas - Picadillo - Papas con chorizo - Flor de calabaza - Chicharrón
+                            </p>
+                        </section>
+
+                        <!-- Huaraches -->
+                        <section>
+                            <h3 class="font-western text-xl text-menu-orange mb-3 text-center tracking-widest uppercase">Huaraches</h3>
+                            <ul class="space-y-1 text-gray-700 font-medium">
+                                <li class="flex items-end"><span class="font-bold">Sencillo</span><div class="menu-dots"></div><span>$60</span></li>
+                                <li class="flex items-end"><span class="font-bold">Huevo</span><div class="menu-dots"></div><span>$70</span></li>
+                                <li class="flex items-end"><span class="font-bold">Costilla</span><div class="menu-dots"></div><span>$90</span></li>
+                                <li class="flex items-end"><span class="font-bold">Especial</span><div class="menu-dots"></div><span>$110</span></li>
+                            </ul>
+                        </section>
+
+                        <!-- Flautas -->
+                        <section>
+                            <h3 class="font-western text-xl text-charro-red mb-1 text-center uppercase">Flautas</h3>
+                            <p class="text-xs text-center text-gray-500 mb-2">Orden con 3 flautas</p>
+                            <ul class="space-y-1 text-gray-700 font-medium">
+                                <li class="flex items-end"><span>Pollo, papa, carne</span><div class="menu-dots"></div><span>$60</span></li>
+                                <li class="flex items-end"><span>Barbacoa</span><div class="menu-dots"></div><span>$70</span></li>
+                                <li class="flex items-end"><span>Especiales</span><div class="menu-dots"></div><span>$90</span></li>
+                            </ul>
+                        </section>
+
+                        <!-- Bebidas -->
+                        <section>
+                            <h3 class="font-western text-xl text-charro-green mb-3 text-center uppercase">Bebidas</h3>
+                            <ul class="space-y-1 text-gray-700 font-medium">
+                                <li class="flex items-end"><span>Aguas de sabor</span><div class="menu-dots"></div><span>$20</span></li>
+                                <li class="flex items-end"><span>Refrescos</span><div class="menu-dots"></div><span>$30</span></li>
+                                <li class="flex items-end"><span>Limonada</span><div class="menu-dots"></div><span>$25</span></li>
+                                <li class="flex items-end"><span>Preparados</span><div class="menu-dots"></div><span>$25</span></li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <!-- COLUMNA DERECHA -->
+                    <div class="space-y-8">
+                        
+                        <!-- Sopes -->
+                        <section>
+                            <h3 class="font-western text-xl text-charro-green mb-3 text-right uppercase pr-4">Sopes</h3>
+                            <ul class="space-y-1 text-gray-700 font-medium">
+                                <li class="flex items-end"><span class="font-bold">Sencillo</span><div class="menu-dots"></div><span>$45</span></li>
+                                <li class="flex items-end"><span class="font-bold">Chorizo</span><div class="menu-dots"></div><span>$50</span></li>
+                                <li class="flex items-end"><span class="font-bold">Costilla</span><div class="menu-dots"></div><span>$60</span></li>
+                                <li class="flex items-end"><span class="font-bold">Con guiso</span><div class="menu-dots"></div><span>$50</span></li>
+                                <li class="flex items-end"><span class="font-bold">Especial</span><div class="menu-dots"></div><span>$70</span></li>
+                            </ul>
+                        </section>
+
+                        <!-- Gorditas -->
+                        <section>
+                            <div class="flex items-center justify-between flex-row-reverse mb-2">
+                                <h3 class="font-western text-2xl text-menu-orange uppercase">Gorditas</h3>
+                                <!-- Badge de precio estilo circular rojo -->
+                                <div class="bg-charro-red text-white font-bold rounded-full w-12 h-12 flex items-center justify-center shadow-md border-2 border-white transform -rotate-6">
+                                    <div class="border border-white/50 rounded-full w-10 h-10 flex items-center justify-center text-sm">
+                                        $25
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 italic mb-2 text-right">Fritas preparadas con crema, lechuga y queso</p>
+                            <p class="text-sm font-bold text-gray-700 leading-relaxed text-center border-t border-b border-gray-200 py-2 bg-white/50">
+                                Pollo - Tinga de res - Rajas - Picadillo - Papas con chorizo - Flor de calabaza - Chicharrón
+                            </p>
+                        </section>
+
+                        <!-- Tacos -->
+                        <section>
+                            <h3 class="font-western text-xl text-menu-orange mb-3 text-center uppercase">Tacos</h3>
+                            <ul class="space-y-1 text-gray-700 font-medium">
+                                <li class="flex items-end"><span>Pastor</span><div class="menu-dots"></div><span>$20</span></li>
+                                <li class="flex items-end"><span>Arrachera</span><div class="menu-dots"></div><span>$30</span></li>
+                                <li class="flex items-end"><span>Chuleta</span><div class="menu-dots"></div><span>$25</span></li>
+                                <li class="flex items-end"><span>Campechanos</span><div class="menu-dots"></div><span>$25</span></li>
+                            </ul>
+                        </section>
+
+                         <!-- Postres -->
+                         <section>
+                            <h3 class="font-western text-xl text-charro-red mb-3 text-center uppercase">Postres</h3>
+                            <ul class="space-y-1 text-gray-700 font-medium">
+                                <li class="flex items-end"><span>Arroz con leche</span><div class="menu-dots"></div><span>$20</span></li>
+                                <li class="flex items-end"><span>Flan</span><div class="menu-dots"></div><span>$30</span></li>
+                                <li class="flex items-end"><span>Pay de limón</span><div class="menu-dots"></div><span>$25</span></li>
+                                <li class="flex items-end"><span>Pan de elote</span><div class="menu-dots"></div><span>$25</span></li>
+                            </ul>
+                        </section>
+                    </div>
+
+                </div>
+
+                <!-- Imagen inferior decorativa -->
+                <div class="mt-8 relative z-10 w-full h-32 md:h-40 overflow-hidden rounded-b-lg opacity-90">
+                     <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa3c?q=80&w=1000&auto=format&fit=crop" 
+                          alt="Comida mexicana ilustrativa" 
+                          class="w-full h-full object-cover object-center mask-image-gradient">
+                    <!-- Gradiente para suavizar la imagen -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-bg-menu-paper via-transparent to-transparent"></div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- ================= SECCIÓN CONOCE ================= -->
+        <main id="conoce" class="w-full hidden-section animate-fade-in">
+             <div class="text-center mb-6 mt-4">
+                <h1 class="font-western text-5xl md:text-7xl text-charro-green drop-shadow-sm tracking-wider uppercase">
+                    CONOCENOS
+                </h1>
+                <h2 class="font-western text-lg md:text-xl text-charro-red uppercase mt-0 md:mt-[-5px] tracking-wide">
+                    GALERIA | CONTACTOS | INFORMACION
+                </h2>
+            </div>
+            <div class="text-center">
+                <h3 class="font-western text-3xl text-charro-red uppercase section-title-deco shadow-[0_3px_0_-1px_#b91c1c]">
+                    GALERIA
+                </h3>
+            </div>
+            <div class="content-box p-2 md:p-3 mb-8 bg-white">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                    <div class="h-64 md:h-72 w-full overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Terraza Restaurante" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="h-64 md:h-72 w-full overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Exterior Restaurante Tarde" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="h-64 md:h-72 w-full overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1621262436859-9941a5472855?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Exterior Restaurante Dia" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="h-64 md:h-72 w-full overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Interior Restaurante" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <h3 class="font-western text-3xl text-charro-red uppercase section-title-deco shadow-[0_3px_0_-1px_#b91c1c]">
+                    INFORMACIÓN
+                </h3>
+            </div>
+            <div class="mt-4 mb-12 pl-4 md:pl-0 max-w-3xl mx-auto space-y-6">
+                <div>
+                    <h4 class="text-charro-green font-bold text-xl mb-2">Contactos</h4>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-black"></i>
+                            <span class="text-gray-700">33-8756-3584</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-black"></i>
+                            <span class="text-gray-700">info@elcharro.mx</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-charro-green font-bold text-xl mb-2">Ubicacion</h4>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-black fill-black/20"></i>
+                        <span class="text-gray-700">Av. Isla Gomera 2291, Jardines del Sur</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-charro-green font-bold text-xl mb-2">Redes Sociales</h4>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="facebook" class="w-5 h-5 text-black fill-black"></i>
+                            <span class="text-gray-700">ElCharro_ComidaMexicana</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="instagram" class="w-5 h-5 text-black"></i>
+                            <span class="text-gray-700">ElCharro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <!-- ================= SECCIÓN EVENTOS ================= -->
+        <main id="eventos" class="w-full hidden-section animate-fade-in">
+            <div class="text-center mb-6 mt-4">
+                <h1 class="font-western text-6xl md:text-7xl text-charro-green drop-shadow-sm tracking-wider uppercase">
+                    EVENTOS
+                </h1>
+                <h2 class="font-western text-xl md:text-2xl text-charro-red uppercase mt-[-10px]">
+                    Eventos Proximos
+                </h2>
+            </div>
+            <div class="content-box p-4 md:p-6 mb-8">
+                <article class="flex flex-col md:flex-row gap-6 mb-8 border-b border-gray-200 pb-8 last:border-0 last:pb-0">
+                    <div class="w-full md:w-5/12 h-48 md:h-40 overflow-hidden rounded shadow-md border border-gray-300 relative">
+                        <img 
+                            src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1000&auto=format&fit=crop" 
+                            alt="Fiestas Patrias" 
+                            class="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    </div>
+                    <div class="w-full md:w-7/12 flex flex-col justify-center">
+                        <h3 class="font-western text-3xl text-charro-red mb-2 border-b-2 border-charro-red inline-block w-fit pr-4">
+                            Fiestas Patrias
+                        </h3>
+                        <div class="text-charro-green font-bold text-lg leading-tight space-y-2">
+                            <p>Ven y celebra con nosotros estas Fiestas Patrias!</p>
+                            <p>Con musica, comida, bebidas y un ambiente inolvidable!</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-5/12 h-48 md:h-40 overflow-hidden rounded shadow-md border border-gray-300 relative">
+                        <img 
+                            src="https://images.unsplash.com/photo-1572051676999-5555620921a9?q=80&w=1000&auto=format&fit=crop" 
+                            alt="Dia de Muertos" 
+                            class="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+                        >
+                         <div class="absolute inset-0 bg-purple-900/20 mix-blend-multiply"></div>
+                    </div>
+                    <div class="w-full md:w-7/12 flex flex-col justify-center">
+                        <h3 class="font-western text-3xl text-charro-red mb-2 border-b-2 border-charro-red inline-block w-fit pr-4">
+                            Dia de Muertos
+                        </h3>
+                        <div class="text-charro-green font-bold text-lg leading-tight space-y-2">
+                            <p>Ven a recordar a nuestros amigos y familiares en El Charro</p>
+                            <p>Con altares, ofrendas y postres limitados solo para estas fiestas</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t-4 border-charro-red py-4 px-6 mt-8 bg-white">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Logo Footer -->
+            <div class="font-western text-charro-green text-2xl tracking-wide">
+                EL CHARRO
+            </div>
+            
+            <!-- Copyright -->
+            <div class="flex items-center gap-1 font-bold text-black text-lg">
+                <i data-lucide="copyright" class="w-6 h-6"></i>
+                <span>opyright</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // Función simple para cambiar pestañas
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.getElementById('menu').classList.add('hidden-section');
+            document.getElementById('conoce').classList.add('hidden-section');
+            document.getElementById('eventos').classList.add('hidden-section');
+            document.getElementById('login').classList.add('hidden-section');
+            
+            // Mostrar la seleccionada
+            const activeSection = document.getElementById(sectionId);
+            if(activeSection) {
+                activeSection.classList.remove('hidden-section');
+            }
+            
+            // Re-renderizar iconos (importante cuando se muestra contenido previamente oculto)
+            lucide.createIcons();
+            
+            // Scroll arriba suave
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mostrar login por defecto como se infiere del último maquetado
+        showSection('login'); 
+    </script>
+</body>
+</html>
