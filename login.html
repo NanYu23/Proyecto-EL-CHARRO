@@ -118,34 +118,26 @@
                 </div>
 
                 <!-- Formulario -->
-                <form class="space-y-6">
-                    
-                    <!-- Campo Nombre de Usuario -->
+                <form id="loginForm" class="space-y-6">
                     <div>
                         <input type="text" 
-                               id="username" 
-                               placeholder="Nombre de Usuario" 
-                               class="login-input w-full p-3 text-lg border-2 border-gray-100 placeholder:text-gray-400 placeholder:font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition"
-                               onfocus="this.placeholder=''"
-                               onblur="this.placeholder='Nombre de Usuario'"
-                               required>
+                            id="username" name="username"
+                            placeholder="Nombre de Usuario"
+                            class="login-input w-full p-3 text-lg border-2 border-gray-100"
+                            required>
                     </div>
 
-                    <!-- Campo Contraseña -->
                     <div>
                         <input type="password" 
-                               id="password" 
-                               placeholder="Contraseña" 
-                               class="login-input w-full p-3 text-lg border-2 border-gray-100 placeholder:text-gray-400 placeholder:font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition"
-                               onfocus="this.placeholder=''"
-                               onblur="this.placeholder='Contraseña'"
-                               required>
+                            id="password" name="password"
+                            placeholder="Contraseña"
+                            class="login-input w-full p-3 text-lg border-2 border-gray-100"
+                            required>
                     </div>
 
-                    <!-- Botón Iniciar Sesión -->
-                    <button type="submit" 
-                            class="w-full bg-white text-charro-red font-bold text-xl uppercase py-3 rounded-md shadow-lg hover:bg-red-700 hover:text-white transition-colors">
-                        Iniciar Sesion
+                    <button type="submit"
+                            class="w-full bg-white text-charro-red font-bold text-xl py-3 rounded-md">
+                        Iniciar Sesión
                     </button>
                 </form>
             </div>
@@ -153,28 +145,32 @@
     </div>
 
     <script>
-        // Inicializar iconos
-        lucide.createIcons();
-
-        // Función simple para cambiar pestañas
+        // --- Cambio de pestañas (solo para login.html si lo usas como multipágina) ---
         function showSection(sectionId) {
-            // Ocultar todas las secciones
-            document.getElementById('menu').classList.add('hidden-section');
-            document.getElementById('conoce').classList.add('hidden-section');
-            document.getElementById('eventos').classList.add('hidden-section');
-            document.getElementById('login').classList.add('hidden-section');
-            
-            // Mostrar la seleccionada
-            const activeSection = document.getElementById(sectionId);
-            if(activeSection) {
-                activeSection.classList.remove('hidden-section');
-            }
-            lucide.createIcons();
-            
-            // Scroll arriba suave
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.location.href = sectionId + ".html"; 
         }
-        showSection('login'); 
+
+        // --- Manejo del formulario de login ---
+        document.querySelector("#loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        const response = await fetch("login.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            window.location.href = "menu.html";
+        } else {
+            alert("Usuario o contraseña incorrectos");
+        }
+    });
     </script>
 </body>
 </html>

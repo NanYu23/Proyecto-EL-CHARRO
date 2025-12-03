@@ -52,9 +52,9 @@
 
             <!-- Navegación -->
             <nav class="flex gap-3">
-                <button class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Menu</button>
-                <button class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Conoce</button>
-                <button class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Eventos</button>
+                <button onclick="showSection('menu')" class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Menu</button>
+                <button onclick="showSection('conoce')" class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Conoce</button>
+                <button onclick="showSection('eventos')" class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Eventos</button>
             </nav>
         </div>
     </header>
@@ -128,24 +128,30 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="w-full border-t-4 border-charro-red py-4 px-6 mt-8">
+    <footer class="w-full border-t-4 border-charro-red py-4 px-6 mt-8 bg-white">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
+
             <!-- Logo Footer -->
             <div class="font-western text-charro-green text-2xl tracking-wide">
                 EL CHARRO
             </div>
-            
-            <!-- Copyright -->
-            <div class="flex items-center gap-1 font-bold text-black text-lg">
-                <i data-lucide="copyright" class="w-6 h-6"></i>
-                <span>opyright</span>
-            </div>
+
+            <!-- BOTÓN CERRAR SESIÓN -->
+            <button 
+                onclick="location.href='login.html'" 
+                class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors"
+            >
+                Cerrar Sesión
+            </button>
+
         </div>
     </footer>
 
     <script>
-        // Inicializar iconos
-        lucide.createIcons();
+        function showSection(sectionId) {
+            window.location.href = sectionId + ".html";
+        }
     </script>
+
 </body>
 </html>

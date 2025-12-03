@@ -65,9 +65,9 @@
 
             <!-- Navegación -->
             <nav class="flex gap-3">
-                <button onclick="alert('Sección Menú en construcción')" class="bg-charro-cream text-charro-red font-bold px-3 py-1 md:px-4 md:py-1 rounded shadow hover:bg-white transition-colors text-sm md:text-base">Menu</button>
-                <button onclick="showSection('conoce')" class="bg-charro-cream text-charro-red font-bold px-3 py-1 md:px-4 md:py-1 rounded shadow hover:bg-white transition-colors text-sm md:text-base ring-2 ring-offset-1 ring-transparent focus:ring-red-500">Conoce</button>
-                <button onclick="showSection('eventos')" class="bg-charro-cream text-charro-red font-bold px-3 py-1 md:px-4 md:py-1 rounded shadow hover:bg-white transition-colors text-sm md:text-base ring-2 ring-offset-1 ring-transparent focus:ring-red-500">Eventos</button>
+                <button onclick="showSection('menu')" class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Menu</button>
+                <button onclick="showSection('conoce')" class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Conoce</button>
+                <button onclick="showSection('eventos')" class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors">Eventos</button>
             </nav>
         </div>
     </header>
@@ -169,109 +169,33 @@
                 </div>
             </div>
         </main>
-
-
-        <!-- ================= SECCIÓN EVENTOS (ANTERIOR) ================= -->
-        <main id="eventos" class="w-full hidden-section animate-fade-in">
-            
-            <!-- Título Principal Eventos -->
-            <div class="text-center mb-6 mt-4">
-                <h1 class="font-western text-6xl md:text-7xl text-charro-green drop-shadow-sm tracking-wider uppercase">
-                    EVENTOS
-                </h1>
-                <h2 class="font-western text-xl md:text-2xl text-charro-red uppercase mt-[-10px]">
-                    Eventos Proximos
-                </h2>
-            </div>
-
-            <!-- Caja de Contenido Eventos -->
-            <div class="content-box p-4 md:p-6 mb-8">
-                
-                <!-- Evento 1 -->
-                <article class="flex flex-col md:flex-row gap-6 mb-8 border-b border-gray-200 pb-8 last:border-0 last:pb-0">
-                    <div class="w-full md:w-5/12 h-48 md:h-40 overflow-hidden rounded shadow-md border border-gray-300 relative">
-                        <img 
-                            src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1000&auto=format&fit=crop" 
-                            alt="Fiestas Patrias" 
-                            class="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-                        >
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                    </div>
-                    <div class="w-full md:w-7/12 flex flex-col justify-center">
-                        <h3 class="font-western text-3xl text-charro-red mb-2 border-b-2 border-charro-red inline-block w-fit pr-4">
-                            Fiestas Patrias
-                        </h3>
-                        <div class="text-charro-green font-bold text-lg leading-tight space-y-2">
-                            <p>Ven y celebra con nosotros estas Fiestas Patrias!</p>
-                            <p>Con musica, comida, bebidas y un ambiente inolvidable!</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Evento 2 -->
-                <article class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-5/12 h-48 md:h-40 overflow-hidden rounded shadow-md border border-gray-300 relative">
-                        <img 
-                            src="https://images.unsplash.com/photo-1572051676999-5555620921a9?q=80&w=1000&auto=format&fit=crop" 
-                            alt="Dia de Muertos" 
-                            class="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-                        >
-                         <div class="absolute inset-0 bg-purple-900/20 mix-blend-multiply"></div>
-                    </div>
-                    <div class="w-full md:w-7/12 flex flex-col justify-center">
-                        <h3 class="font-western text-3xl text-charro-red mb-2 border-b-2 border-charro-red inline-block w-fit pr-4">
-                            Dia de Muertos
-                        </h3>
-                        <div class="text-charro-green font-bold text-lg leading-tight space-y-2">
-                            <p>Ven a recordar a nuestros amigos y familiares en El Charro</p>
-                            <p>Con altares, ofrendas y postres limitados solo para estas fiestas</p>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-        </main>
-
     </div>
 
     <!-- FOOTER -->
     <footer class="w-full border-t-4 border-charro-red py-4 px-6 mt-8 bg-white">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
+
             <!-- Logo Footer -->
             <div class="font-western text-charro-green text-2xl tracking-wide">
                 EL CHARRO
             </div>
-            
-            <!-- Copyright -->
-            <div class="flex items-center gap-1 font-bold text-black text-lg">
-                <i data-lucide="copyright" class="w-6 h-6"></i>
-                <span>opyright</span>
-            </div>
+
+            <!-- BOTÓN CERRAR SESIÓN -->
+            <button 
+                onclick="location.href='login.html'" 
+                class="bg-charro-cream text-charro-red font-bold px-4 py-1 rounded shadow hover:bg-white transition-colors"
+            >
+                Cerrar Sesión
+            </button>
+
         </div>
     </footer>
 
     <script>
-        // Inicializar iconos
-        lucide.createIcons();
-
-        // Función simple para cambiar pestañas
         function showSection(sectionId) {
-            // Ocultar todo
-            document.getElementById('conoce').classList.add('hidden-section');
-            document.getElementById('eventos').classList.add('hidden-section');
-            
-            // Mostrar selección
-            const activeSection = document.getElementById(sectionId);
-            if(activeSection) {
-                activeSection.classList.remove('hidden-section');
-            }
-            
-            // Reinicializar iconos por si acaso (a veces necesario en renders dinámicos)
-            lucide.createIcons();
-            
-            // Scroll al top suavemente
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.location.href = sectionId + ".html";
         }
     </script>
+
 </body>
 </html>
