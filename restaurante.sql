@@ -54,6 +54,13 @@ ALTER TABLE `usuario`
   MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
+INSERT INTO `usuario` (`user_ID`, `username`, `password`) VALUES
+(1, 'admin', 'admin123'),
+(2, 'cocinero', 'cocina123'),
+(3, 'mesero', 'mesero123');
+(4, 'cliente', 'cliente123');
+(5, 'gerente', 'gerente123');
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
